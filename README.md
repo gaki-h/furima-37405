@@ -22,8 +22,7 @@
 
 ｜ Column           | Type       | Options                        |
 ｜ ---------------- | ---------- | ------------------------------ |
-｜ image            | string     | null: false                    |
-｜ price            | string     | null: false                    |
+｜ price            | integer    | null: false                    |
 ｜ name             | string     | null: false                    |
 ｜ description      | string     | null: false                    |
 ｜ condition_id     | integer    | null: false                    |
@@ -36,7 +35,6 @@
 ### Association
 
 - belongs_to :user
-- has_one :destination
 - has_one :order
 
 
@@ -45,7 +43,7 @@
 ｜ Column         | Type       | Options                        |
 ｜ -------------- | ---------- | ------------------------------ |
 ｜ post_code      | string     | null: false                    |
-｜ prefecture     | string     | null: false                    |
+｜ prefecture_id  | integer    | null: false                    |
 ｜ municipalities | string     | null: false                    |
 ｜ address        | string     | null: false                    |
 ｜ building_name  | string     |                                |
@@ -54,7 +52,6 @@
 
 ### Association
 
-- belongs_to :item
 - belongs_to :order
 
 ## ordersテーブル
