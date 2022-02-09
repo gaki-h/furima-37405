@@ -28,17 +28,17 @@
 ｜ condition_id     | integer    | null: false                    |
 ｜ shipping_cost_id | integer    | null: false                    |
 ｜ prefecture_id    | integer    | null: false                    |
-｜ shipping_days    | integer    | null: false                    |
+｜ shipping_days_id | integer    | null: false                    |
 ｜ category_id      | integer    | null: false                    |
 ｜ user             | references | null: false, foreign_key: true |
 
 ### Association
 
-- belongs_to :user
-- has_one :order
+- has_many :users
+- has_many :orders
 
 
-## destinationテーブル
+## destinationsテーブル
 
 ｜ Column         | Type       | Options                        |
 ｜ -------------- | ---------- | ------------------------------ |
