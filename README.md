@@ -2,43 +2,42 @@
 
  ## usersテーブル
 
-｜ Column          | Type    | Options                   |
-｜ ----------------| ------- | ------------------------- |
-｜ nickname        | string  | null: false               |
-｜ email           | string  | null: false               |
-｜ password        | string  | null: false               |
-｜ last_name       | string  | null: false               |
-｜ first_name      | string  | null: false               |
-｜ last_name_kana  | string  | null: false               |
-｜ first_name_kana | string  | null: false               |
-｜ birth_data      | integer | null: false               |
+｜ Column             | Type    | Options                   |
+｜ ------------------ | ------- | ------------------------- |
+｜ nickname           | string  | null: false               |
+｜ email              | string  | null: false, unique: true |
+｜ encrypted_password | string  | null: false               |
+｜ last_name          | string  | null: false               |
+｜ first_name         | string  | null: false               |
+｜ last_name_kana     | string  | null: false               |
+｜ first_name_kana    | string  | null: false               |
+｜ birth_date         | date    | null: false               |
 
 ### Association
 
 - has_many :items
-- has_one :destination
-
+- has_many :orders
 
 ## itemsテーブル
 
-｜ Column        | Type       | Options                        |
-｜ ------------- | ---------- | ------------------------------ |
-｜ image         | string     | null: false                    |
-｜ price         | string     | null: false                    |
-｜ name          | string     | null: false                    |
-｜ description   | string     | null: false                    |
-｜ condition     | string     | null: false                    |
-｜ shipping_cost | string     | null: false                    |
-｜ prefecture_id | string     | null: false                    |
-｜ shipping_days | string     | null: false                    |
-｜ category_id   | references | null: false, foreign_key: true |
-｜ brand_id      | references | null: false, foreign_key: true |
+｜ Column           | Type       | Options                        |
+｜ ---------------- | ---------- | ------------------------------ |
+｜ image            | string     | null: false                    |
+｜ price            | string     | null: false                    |
+｜ name             | string     | null: false                    |
+｜ description      | string     | null: false                    |
+｜ condition_id     | integer    | null: false                    |
+｜ shipping_cost_id | integer    | null: false                    |
+｜ prefecture_id    | integer    | null: false                    |
+｜ shipping_days    | integer    | null: false                    |
+｜ category_id      | integer    | null: false                    |
+｜ user             | references | null: false, foreign_key: true |
 
 ### Association
 
-- belongs_to :users
-- belongs_to :category
-- belongs_to :brand
+- belongs_to :user
+- has_one :destination
+- has_one :order
 
 
 ## destinationテーブル
@@ -51,44 +50,22 @@
 ｜ address        | string     | null: false                    |
 ｜ building_name  | string     |                                |
 ｜ phone_number   | string     | null: false                    |
-｜ user_id        | references | null: false, foreign_key: true |
+｜ order          | references | null: false, foreign_key: true |
 
 ### Association
 
-- belongs_to :users
-- has_many :orders
-
+- belongs_to :item
+- belongs_to :order
 
 ## ordersテーブル
 
 ｜ Column  | Type       | Options                        |
 ｜ ------- | ---------- | ------------------------------ |
-｜ user_id | references | null: false, foreign_key: true |
-｜ item_id | references | null: false, foreign_key: true |
+｜ user    | references | null: false, foreign_key: true |
+｜ item    | references | null: false, foreign_key: true |
 
 ### Association
 
-- belongs_to :destination
-
-
-## categoryテーブル
-
-｜ Column   | Type       | Options                        |
-｜ -------- | ---------- | ------------------------------ |
-｜ name     | string     | null: false                    |
-｜ ancestry | references | null: false, foreign_key: true |
-
-### Association
-
-- has_many :items
-
-
-## brandテーブル
-
-｜ Column | Type       | Options                        |
-｜ ------ | ---------- | ------------------------------ |
-｜ name   | string     | null: false                    |
-
-### Association
-
-- has_many :items
+- belongs_to :user
+- belongs_to :item
+- has_one :destination
