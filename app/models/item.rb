@@ -9,12 +9,20 @@ class Item < ApplicationRecord
   belongs_to :prefecture
   belongs_to :shipping_days
 
+with_options presence: true do
+  validates :image
+  validates :name
+  validates :description
+  validates :price, inclusion: { in: 300..9_999_999 }, format: { with: /\A[0-9]+\z/ }
+  # numericality: {only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }
+end
 
-  validates :title, :text, presence: true
-  validates :category_id, numericality: { other_than: 1, message: "can't be blank" }
-  validates :condition_id, numericality: { other_than: 1, message: "can't be blank" } 
-  validates :shipping_cost_id, numericality: { other_than: 1, message: "can't be blank" } 
-  validates :prefecture_id, numericality: { other_than: 1, message: "can't be blank" } 
-  validates :shipping_days_id, numericality: { other_than: 1, message: "can't be blank" } 
-
+with_options numericality: { other_than: 1, message: "can't be blank" } do
+  # validates :title, :text, presence: true
+  validates :category_id
+  validates :condition_id
+  validates :shipping_cost_id
+  validates :prefecture_id
+  validates :shipping_days_id
+  end
 end
