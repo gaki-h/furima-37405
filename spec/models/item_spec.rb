@@ -1,6 +1,5 @@
 require 'rails_helper'
 RSpec.describe Item, type: :model do
-  # describe '#create' do
   before do
     @item = FactoryBot.build(:item)
   end
@@ -77,6 +76,11 @@ RSpec.describe Item, type: :model do
         @item.price = 'abcdf'
         @item.valid?
         expect(@item.errors.full_messages).to include "Price is not included in the list"  
+      end
+      it "userが紐付いていないと出品できない" do
+        @item.user_id = ''
+        @item.valid?
+        expect(@item.errors.full_messages) 
       end
     end
   end

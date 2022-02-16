@@ -1,7 +1,7 @@
 class Item < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
   has_many :users
-  has_many :orders
+  # has_many :orders
   has_one_attached :image
   belongs_to :category
   belongs_to :condition
@@ -14,11 +14,9 @@ with_options presence: true do
   validates :name
   validates :description
   validates :price, inclusion: { in: 300..9_999_999 }, format: { with: /\A[0-9]+\z/ }
-  # numericality: {only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }
 end
 
 with_options numericality: { other_than: 1, message: "can't be blank" } do
-  # validates :title, :text, presence: true
   validates :category_id
   validates :condition_id
   validates :shipping_cost_id
