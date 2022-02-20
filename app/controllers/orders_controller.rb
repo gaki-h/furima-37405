@@ -1,9 +1,12 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!, only: :index
+  before_action :set_order_item, only: [:index, :create]
 
   def index
     @order_destination = OrderDestination.new
-    if current_user == @item.user || @item.order != nil
+    # if current_user == @item.user || @item.order != nil
+    # 差分確認
+    if @item.user_id == current_user.id || @item.order != nil
       redirect_to root_path
     end
   end
