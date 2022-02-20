@@ -7,6 +7,5 @@ FactoryBot.define do
     address { '神宮前1-1-1' }
     building_name { 'ケヤキビル' }
     phone_number {'00012345678'}
-    # phone_number {Faker::PhoneNumber.cell_phone_in_e164}
   end
 end

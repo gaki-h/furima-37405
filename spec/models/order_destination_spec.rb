@@ -60,6 +60,21 @@ RSpec.describe OrderDestination, type: :model do
         @order_destination.valid?
         expect(@order_destination.errors.full_messages).to include("Phone number Input only number")
       end
+      it 'userが紐付いていなければ登録できない' do
+        @order_destination.user_id = nil
+        @order_destination.valid?
+        expect(@order_destination.errors.full_messages).to include("User can't be blank")
+      end
+      it 'itemが紐付いていなければ登録できない' do
+        @order_destination.item_id = nil
+        @order_destination.valid?
+        expect(@order_destination.errors.full_messages).to include("Item can't be blank")
+      end
+      it 'prefecture_idが1では登録できない' do
+        @order_destination.prefecture_id = 1
+        @order_destination.valid?
+        expect(@order_destination.errors.full_messages).to include("Prefecture can't be blank")
+      end
     end
   end
 end
