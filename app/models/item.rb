@@ -16,7 +16,7 @@ with_options presence: true do
   validates :price, inclusion: { in: 300..9_999_999 }, format: { with: /\A[0-9]+\z/ }
 end
 
-with_options numericality: { other_than: 1, message: "can't be blank" } do
+with_options numericality: { other_than: 1, message: "を選択してください" } do
   validates :category_id
   validates :condition_id
   validates :shipping_cost_id
